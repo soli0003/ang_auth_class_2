@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <!-------------------NAVBAR------------------------->
+  <app-navbar></app-navbar>
+  <div class="container-fluid text-center">
+    <div class="row content">
+
+      <!-------------------cart------------------------->
+      <div class="col-sm-2 sidenav">
+        <app-cart></app-cart>
+      </div>
+
+      <!-------------------mid------------------------->
+      <div class="col-sm-8 text-left">
+        <router-outlet></router-outlet>
+      </div>
+
+      <!-------------------right------------------------->
+      <div class="col-sm-2 sidenav">
+        <app-right></app-right>
+      </div>
+    </div>
+  </div>
+
+  <!-------------------footer------------------------->
+  <footer class="container-fluid text-center">
+    <app-footer></app-footer>
+  </footer>
+</body>
+
+</html>
