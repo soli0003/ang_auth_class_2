@@ -11,10 +11,12 @@ import { CartService } from '../Services/cart.service';
   styleUrls: ['./show.component.css']
 })
 export class ShowComponent {
-  title = 'myapp';
-  myProducts: any[] = []
-  mProducts: any[] = []
-  @Input() cart: any[] = [];
+    imageSelected = false;
+    selectedImage: File | null = null;
+    title = 'myapp';
+    myProducts: any[] = []
+    mProducts: any[] = []
+    @Input() cart: any[] = [];
 
 
   constructor(
@@ -42,21 +44,26 @@ export class ShowComponent {
     console.log(this.cartService.getCartItems());
   }
 
-  
+  onFileSelected(event: any) {
+    this.selectedImage = event.target.files[0];
+    console.log(this.selectedImage);
+
+
+    this.imageSelected = true;
+  }
 
   add(price: number, desc: any) {
-    this.prodSrv.addProduct({ price, desc }).subscribe(
-      res => {
-        console.log(res);
-        this.showData();
-      },
-      error => {
-        if (error.status === 401) {
-          this.auth.showPromptForLoginOrRegister();
-        }
-      }
-    );
+    if (this.selectedImage) {
+      const prodData = new FormData();
+      prodData.append('image', this.selectedImage , this.selectedImage.name);
+      prodData.append('description', desc);
+      prodData.append('price', price.toString());
+      this.prodSrv.addProduct(prodData).subscribe(res => console.log(res))
+    }
+    this.showData()
   }
+
+  
 
   del(id: number) {
     this.prodSrv.delProduct(id).subscribe(
@@ -72,19 +79,23 @@ export class ShowComponent {
     );
   }
 
-  upd(price: number, desc: string, id: number) {
-    this.prodSrv.updProduct({ price, desc }, id).subscribe(
-      res => {
-        console.log(res);
-        this.showData();
-      },
-      error => {
-        if (error.status === 401) {
-          this.auth.showPromptForLoginOrRegister();
-        }
+  upd(price: number, desc: string, id: number, imageInput: any) {
+  const imageFile: File | null = imageInput.files[0] || null;
+  const product = { price, desc };
+
+  this.prodSrv.updProduct(product, id, imageFile).subscribe(
+    res => {
+      console.log(res);
+      this.showData();
+    },
+    error => {
+      if (error.status === 401) {
+        this.auth.showPromptForLoginOrRegister();
       }
-    );
-  }
+    }
+  );
+}
+
 
   checkOut() {
     this.auth.checkOut(this.cart).subscribe(
@@ -102,4 +113,27 @@ export class ShowComponent {
       localStorage.setItem('token', res.access);
     });
   }
+
+  onImageSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.uploadImage(file);
+  }
+
+  uploadImage(file: File) {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    this.prodSrv.uploadImage(formData).subscribe(
+      res => {
+        // Handle the successful upload response
+        console.log(res);
+      },
+      error => {
+        // Handle the upload error
+        console.error(error);
+      }
+    );
+  }
+  
 }
+

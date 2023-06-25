@@ -36,7 +36,7 @@ export class AuthService {
   showPromptForLoginOrRegister() {
     Swal.fire({
       icon: 'error',
-      title: 'Unauthorized',
+      title: 'Login Required',
       text: 'You need to login or register to perform this action.',
       showCancelButton: true,
       confirmButtonText: 'Login',

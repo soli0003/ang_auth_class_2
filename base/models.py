@@ -3,10 +3,13 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 
+
+
 # Create your models here.
 class Product(models.Model):
     desc = models.CharField(max_length=50,null=True,blank=True)
     price = models.IntegerField()
+    image = models.ImageField(upload_to='product_images', null=True, blank=True, default='placeholder.png')
     createdTime=models.DateTimeField(auto_now_add=True)
  
     def __str__(self):
@@ -25,7 +28,7 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     desc = models.CharField(max_length=50,null=True,blank=True)
     price = models.IntegerField()
-    amount = models.IntegerField()
+    quantity = models.IntegerField()
     createdTime=models.DateTimeField(auto_now_add=True)
  
     def __str__(self):
@@ -34,7 +37,7 @@ class Order(models.Model):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields =  ['amount', 'desc', 'price']
+        fields =  '__all__'
     def create(self, validated_data):
         # return Order.objects.create(**validated_data)
         user = self.context['user']

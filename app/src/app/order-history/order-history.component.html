@@ -1,0 +1,24 @@
+<div>
+    <label for="filterDate">Filter by Date:</label>
+    <input type="date" id="filterDate" [(ngModel)]="selectedDate" (change)="filterByDate()">
+    <button (click)="showData()">show order History</button>  
+  </div>
+<div *ngIf="orderHistory.length > 0">
+    <h3 class="text-center">Cart</h3>
+    <ul class="list-group">
+      <li *ngFor="let item of filteredOrderHistory" class="list-group-item">
+        <div class="d-flex align-items-center justify-content-between">
+          <!-- <img src="{{ item.image }}" width="50" height="50" class="rounded-circle mr-3"> -->
+          <div>
+            <h5 class="list-group-item-heading">Product: {{ item.desc }}</h5>
+            <p class="list-group-item-text">Price: {{ item.price }}</p>
+            <p class="list-group-item-text">Date: {{ item.createdTime | date:'short' }}</p> 
+        </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="orderHistory.length === 0">
+    <p class="text-center">no order History.</p>
+  </div>
+ 

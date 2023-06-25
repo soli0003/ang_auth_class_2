@@ -11,7 +11,7 @@
           <div>
             <div class="quantity">
                 <button class="btn btn-secondary btn-sm" (click)="updateQuantity(item, false)">-</button>
-                <span>{{ item.quantity || 0 }}</span>
+                <span>{{ item.quantity || 1 }}</span>
                 <button class="btn btn-secondary btn-sm" (click)="updateQuantity(item, true)">+</button>
               </div>
             <button class="btn btn-danger btn-sm" (click)="removeFromCart(item)">Remove</button>

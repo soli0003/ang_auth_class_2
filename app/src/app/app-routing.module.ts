@@ -8,6 +8,7 @@ import { MidComponent } from './mid/mid.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"footer", component:FooterComponent},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
+  {path:"ordrHistory", component:OrderHistoryComponent},
 ];
 
 @NgModule({

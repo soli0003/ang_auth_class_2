@@ -33,7 +33,7 @@ export class CartComponent {
 
   updateQuantity(item: any, increase: boolean) {
     if (increase) {
-      item.quantity = (item.quantity || 0) + 1;
+      item.quantity = (item.quantity || 1) + 1;
     } else {
       item.quantity = Math.max((item.quantity || 0) - 1, 0);
       if (item.quantity === 0) {

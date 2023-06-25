@@ -1,18 +1,16 @@
-<p>Product </p>
+<p>Product</p>
 <div *ngFor="let prod of mProducts">
-  desc:{{prod.desc}}
-  Price:{{prod.price}}
-  
+  desc: {{ prod.description }}
+  Price: {{ prod.price }}
+  <img [src]="'http://127.0.0.1:8000/' + prod.image" alt="Product Image" width="100px">
+
   <button (click)="del(prod.id)">del</button>
-  <button (click)="upd(+price.value,desc.value,+prod.id)">upd</button>
-  <button (click)="buy(prod.price,prod.desc,+prod.id)">add to cart</button>
+  <button (click)="upd(+price.value, desc.value, +prod.id, imageInput)">upd</button>
+  <button (click)="buy(prod.price, prod.description, +prod.id)">add to cart</button>
 </div>
 <hr>
 <title>Add/Update</title>
-desc:<input #desc>
-Price:<input #price>
+desc: <input #desc>
+Price: <input #price>
+<input #imageInput type="file" (change)="onFileSelected($event)" accept="image/*" required>
 <button (click)="add(+price.value,desc.value)">add</button>
-
-
-
-

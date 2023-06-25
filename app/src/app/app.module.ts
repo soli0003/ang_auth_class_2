@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CartComponent } from './cart/cart.component';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
-    CartComponent
+    CartComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule,
